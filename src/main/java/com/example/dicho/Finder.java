@@ -1,62 +1,81 @@
 package com.example.dicho;
 
+import static com.example.dicho.Utility.getMedian;
+import static com.example.dicho.Utility.splitArray;
+
+/**
+ * CheckStyle forces me.
+ */
 public class Finder {
 
-	public int find(final int[] input, final int intToFind) {
+    /**
+     * Search intToFind in input using dichotomy.
+     *
+     * @param input     array to search
+     * @param intToFind int to find
+     * @return index of intToFind if present or else -1
+     */
+    public int find(final int[] input, final int intToFind) {
 
-		int median = 0;
-		int diff = 0;
+        int median;
+        int diff;
+        int[] subArray;
 
-		if (input.length == 0) {
-			return -1;
-		}
+        if (input.length == 0) {
+            return -1;
+        }
 
-		if (input.length <= 1) {
+        if (input.length <= 1) {
 
-			return input[0] == intToFind ? 0 : -1;
+            return input[0] == intToFind ? 0 : -1;
 
-		}
+        }
 
-		median = Utility.getMedian(input.length) - 1;
-		diff = intToFind - input[median];
+        median = getMedian(input.length) - 1;
+        diff = intToFind - input[median];
 
-		switch ((int) Math.signum(diff)) {
+        switch ((int) Math.signum(diff)) {
 
-		case 0: {
+            case 0: {
 
-			return median;
-		}
+                return median;
+            }
 
-		case 1: {
+            case 1: {
 
-			diff = find(Utility.splitArray(input, median + 1, input.length - 1), intToFind);
+                subArray = splitArray(input, median + 1, input.length - 1);
 
-			if (diff == -1) {
-				return -1;
-			}
+                diff = find(subArray, intToFind);
 
-			median += diff + 1;
-			return median;
+                if (diff == -1) {
+                    return -1;
+                }
 
-		}
-		case -1: {
 
-			diff = find(Utility.splitArray(input, 0, median - 1), intToFind);
+                median += diff + 1;
+                return median;
 
-			if (diff == -1) {
-				return -1;
-			}
+            }
+            case -1: {
 
-			median -= (median - diff);
+                subArray = splitArray(input, 0, median - 1);
 
-			return median;
+                diff = find(subArray, intToFind);
 
-		}
+                if (diff == -1) {
+                    return -1;
+                }
 
-		default:
-			return -1;
-		}
+                median -= (median - diff);
 
-	}
+                return median;
+
+            }
+
+            default:
+                return -1;
+        }
+
+    }
 
 }

@@ -5,7 +5,11 @@
 	<groupId>com.example</groupId>
 	<artifactId>dicho</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dicho</name>
+    <properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+    </properties>
+    <name>dicho</name>
 
 
 

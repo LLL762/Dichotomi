@@ -1,84 +1,53 @@
 package com.example.dicho;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class FinderTestIT {
 
-	private final Finder finder = new Finder();
-	private final int[] arrayToTest = { -2, -1, 0, 13, 24, 37, 44, 56, 99, 117 };
+    private final Finder finder = new Finder();
+    private final int[] arrayToTest = {-2, -1, 0, 13, 24, 37, 44, 56, 99, 117};
 
-	@Test
-	void test() {
+    @Test
+    void test() {
 
-		final int expectedResult = 3;
-		final int intToTest = 13;
+        final int[] expectedResults = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        final int[] intsToTest = arrayToTest;
 
-		final int actualResult = finder.find(arrayToTest, intToTest);
+        for (int i = 0; i < intsToTest.length; i++) {
 
-		assertThat(actualResult).isEqualTo(expectedResult);
+            final int actualResult = finder.find(arrayToTest, intsToTest[i]);
 
-	}
+            assertThat(actualResult).isEqualTo(expectedResults[i]);
+        }
 
-	@Test
-	void test5() {
 
-		final int expectedResult = 5;
-		final int intToTest = 37;
+    }
 
-		final int actualResult = finder.find(arrayToTest, intToTest);
 
-		assertThat(actualResult).isEqualTo(expectedResult);
+    @Test
+    void test2() {
 
-	}
+        final int expectedResult = -1;
+        final int intToTest = 34;
 
-	@Test
-	void test2() {
+        final int actualResult = finder.find(arrayToTest, intToTest);
 
-		final int expectedResult = 0;
-		final int intToTest = -2;
+        assertThat(actualResult).isEqualTo(expectedResult);
 
-		final int actualResult = finder.find(arrayToTest, intToTest);
+    }
 
-		assertThat(actualResult).isEqualTo(expectedResult);
+    @Test
+    void test3() {
 
-	}
+        final int expectedResult = -1;
+        final int intToTest = 789;
 
-	@Test
-	void test3() {
+        final int actualResult = finder.find(arrayToTest, intToTest);
 
-		final int expectedResult = 9;
-		final int intToTest = 117;
+        assertThat(actualResult).isEqualTo(expectedResult);
 
-		final int actualResult = finder.find(arrayToTest, intToTest);
-
-		assertThat(actualResult).isEqualTo(expectedResult);
-
-	}
-
-	@Test
-	void test4() {
-
-		final int expectedResult = -1;
-		final int intToTest = 34;
-
-		final int actualResult = finder.find(arrayToTest, intToTest);
-
-		assertThat(actualResult).isEqualTo(expectedResult);
-
-	}
-
-	@Test
-	void test6() {
-
-		final int expectedResult = -1;
-		final int intToTest = 789;
-
-		final int actualResult = finder.find(arrayToTest, intToTest);
-
-		assertThat(actualResult).isEqualTo(expectedResult);
-
-	}
+    }
 
 }
